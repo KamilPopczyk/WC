@@ -24,9 +24,9 @@ def site_map(main_url: str):
         site_map_dict[url] = {'title': title,
                               'links': links_set}
 
-        # for link in links:
-        #     if not site_map_dict.get(link):
-        #         site_parser(link)
+        for link in links_set:
+            if not site_map_dict.get(link):
+                site_parser(link)
 
     # "global" variables
     site_domain = main_url.split('//')[-1].split('//')[0]  # separate domain from url
