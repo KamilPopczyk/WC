@@ -25,7 +25,7 @@ def site_map(main_url: str) -> dict:
         site_map_dict[url] = {'title': title,
                               'links': links_set}
 
-        for link in links_set:  # "We have to go deeper"
+        for link in links_set:  # "We need to go deeper"
             if not site_map_dict.get(link):
                 site_parser(link)
 
