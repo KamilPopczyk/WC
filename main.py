@@ -5,9 +5,13 @@ from bs4 import BeautifulSoup
 def site_map(main_url: str) -> dict:
 
     def site_parser(url: str):
-        site = requests.get(url).text
-        html_parser = BeautifulSoup(site, 'html.parser')
+        try:
+            site = requests.get(url).text
+        except requests.exceptions.RequestException as err:
+            print('Error url: ', err)
+            exit()
 
+        html_parser = BeautifulSoup(site, 'html.parser')
         title = html_parser.find('title').text
         links = html_parser.find_all('a')
         links_set = set()   # storage for links
