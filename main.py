@@ -16,7 +16,7 @@ def site_map(main_url: str) -> dict:
         links = html_parser.find_all('a')
         links_set = set()   # storage for links
         for link in links:
-            new_link = link.get('href')     # cut only links
+            new_link = str(link.get('href'))  # cut only links
             if new_link.startswith('/'):    # filter links with domain
                 links_set.add('http://' + site_domain + new_link)   # make correct url
             if new_link.startswith('http://' + site_domain) or new_link.startswith('https://' + site_domain):
@@ -39,6 +39,7 @@ def site_map(main_url: str) -> dict:
 
 
 if __name__ == '__main__':
-    answer = site_map('http://0.0.0.0:8000')
+    url = 'http://0.0.0.0:8000'
+    answer = site_map(url)
     print(answer)
 
