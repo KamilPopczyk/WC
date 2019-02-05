@@ -2,17 +2,14 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def site_map(main_url: str):
+def site_map(main_url: str) -> dict:
 
     def site_parser(url: str):
         site = requests.get(url).text
         html_parser = BeautifulSoup(site, 'html.parser')
 
-        print(site_domain)
         title = html_parser.find('title').text
-        print(title)
         links = html_parser.find_all('a')
-        print(links)
         links_set = set()   # storage for links
         for link in links:
             new_link = link.get('href')     # cut only links
@@ -33,9 +30,11 @@ def site_map(main_url: str):
     site_map_dict = dict()
     site_parser(main_url)
 
-    print(site_map_dict)
+    return site_map_dict
 
 
 
 if __name__ == '__main__':
-    site_map('http://0.0.0.0:8000')
+    answer = site_map('http://0.0.0.0:8000')
+    print(answer)
+
